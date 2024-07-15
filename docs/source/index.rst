@@ -1,0 +1,47 @@
+TechRAMEN 2024 Conference ハンズオン資料
+==============================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+ハンズオン概要
+==================
+
+:日時: 2024/7/27(土) 12:30～16:00 ※終了時間は前後する可能性があります
+:場所: チャーシュー - [セッション/ハンズオン] 1F 第一会議室
+:持ち物: * ノートパソコン（OSはWindows, macOS, Linuxのいずれか）
+         * 充電アダプタ（3時間以上なのでバッテリー切れに注意してください）
+         * スマートフォン（QRコードを読んでURLを開く操作をします）
+
+Python製のWebアプリケーションフレームワークである `Django <https://www.djangoproject.com/>`_ （ジャンゴと読みます）の使い方を学ぶハンズオンセッションです。
+
+飲食店で見かけるスマートフォンからセルフオーダーできるシステムの簡易版をDjangoで作ります。
+
+事前準備
+==================
+
+作業をスムーズに進めるために、事前準備をお願いします。
+パソコンのセットアップなどの準備をお願いします。
+
+* Pythonのインストール
+
+  * 推奨は最新の安定版 Python 3.12
+  * Django 5.0はPython 3.10以上をサポートしているため、 3.10 以上のバージョンをインストールしてください。
+  * WindowsとmacOSの場合はオフィシャルサイトで配布されているインストーラーを推奨します。
+
+    * https://www.python.org/downloads/
+
+  * Linuxの場合はvenvモジュールを使えるようにしてください。
+
+    * Ubuntuの場合は `python3-venv` パッケージなど。
+    * Ubuntuの場合に、 `Deadsnakes PPA <https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa>`_ を使うと、新しいバージョンのPythonのインストールが簡単です。
+
+* VisualStudioCode（VSCode）のインストール
+
+  * https://azure.microsoft.com/ja-jp/products/visual-studio-code
+
+* GitHubアカウントの登録
+
+  * VSCodeでインターネット経由のポート転送機能を使うためには、GitHubアカウントが必要になります。
+  * https://github.com/
