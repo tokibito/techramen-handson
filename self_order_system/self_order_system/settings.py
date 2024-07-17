@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'debug_toolbar',  # django-debug-toolbar
+    'django_bootstrap5',  # django-bootstrap5
+    'self_order',  # self_orderアプリケーション
 ]
 
 MIDDLEWARE = [
@@ -60,7 +62,13 @@ ROOT_URLCONF = 'self_order_system.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            # bootstrap5を適用する場合は次の行のコメントを外す
+            # BASE_DIR / 'templates_bootstrap5',
+
+            # テンプレートフゕァイルのディレクトリを指定
+            BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +137,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 画像をアップロードするための設定
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'

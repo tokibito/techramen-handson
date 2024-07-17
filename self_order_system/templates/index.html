@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block page_title %}ラーメン セルフオーダー{% endblock %}
+
+{% block title %}ラーメン セルフオーダー{% endblock %}
+
+{% blcok content %}
+<p>テーブル番号を選んで[次へ]を押してください</p>
+<form action="{% url 'order' %}" method="post">
+    {% csrf_token %}
+    {% include with submit_text="次へ" %}
+</form>
+{% endblock %}
