@@ -25,3 +25,6 @@ language = 'ja'
 
 html_theme = 'bizstyle'
 html_static_path = ['_static']
+html_theme_options = {
+    'maincolor': '#343434',
+}
