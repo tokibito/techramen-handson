@@ -11,9 +11,10 @@ TechRAMEN 2024 Conference ハンズオン
 
 :日時: 2024/7/27(土) 12:30～16:00 ※終了時間は前後する可能性があります
 :場所: チャーシュー - [セッション/ハンズオン] 1F 第一会議室
-:持ち物: * ノートパソコン（OSはWindows, macOS, Linuxのいずれか）
-         * 充電アダプタ（3時間以上なのでバッテリー切れに注意してください）
-         * スマートフォン（QRコードを読んでURLを開く操作をします。動作確認もスマートフォンで行います）
+:持ち物:
+    * ノートパソコン（OSはWindows, macOS, Linuxのいずれか）
+    * 充電アダプタ（3時間以上なのでバッテリー切れに注意してください）
+    * スマートフォン（QRコードを読んでURLを開く操作をします。動作確認もスマートフォンで行います）
 
 Python製のWebアプリケーションフレームワークである `Django <https://www.djangoproject.com/>`_ （ジャンゴと読みます）の使い方を学ぶハンズオンセッションです。
 
@@ -23,7 +24,6 @@ Python製のWebアプリケーションフレームワークである `Django <h
 ==================
 
 作業をスムーズに進めるために、事前準備をお願いします。
-パソコンのセットアップなどの準備をお願いします。
 
 * Pythonのインストール
 
@@ -38,7 +38,7 @@ Python製のWebアプリケーションフレームワークである `Django <h
     * Ubuntuの場合は `python3-venv` パッケージなど。
     * Ubuntuの場合に、 `Deadsnakes PPA <https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa>`_ を使うと、新しいバージョンのPythonのインストールが簡単です。
 
-* VisualStudioCode（VSCode）のインストール
+* Visual Studio Code（VSCode）のインストール
 
   * https://azure.microsoft.com/ja-jp/products/visual-studio-code
 
