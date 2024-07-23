@@ -1,3 +1,4 @@
+from typing import Optional
 from dataclasses import dataclass, field, asdict
 
 
@@ -17,8 +18,9 @@ class SessionToppingOrder:
 @dataclass
 class SessionOrder:
     table_no: int
-    item_id: int = None
+    item_id: Optional[int] = None
     toppings: list[SessionToppingOrder] = field(default_factory=list)
+    is_ordered: bool = False
 
     def __str__(self):
         return f'{self.item_id} {self.toppings}'
@@ -28,5 +30,7 @@ class SessionOrder:
 
     @classmethod
     def from_dict(cls, data: dict):
-        toppings = [SessionToppingOrder.from_dict(d) for d in data['toppings']]
-        return cls(**data, toppings=toppings)
+        toppings_data = data.pop('toppings', [])
+        instance = cls(**data)
+        instance.toppings = [SessionToppingOrder.from_dict(d) for d in toppings_data]
+        return instance

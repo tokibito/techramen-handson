@@ -32,7 +32,7 @@ class ToppingOrder(models.Model):
     '''トッピング注文'''
     order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='topping_orders', verbose_name='注文')
     topping = models.ForeignKey(Topping, on_delete=models.CASCADE, verbose_name='トッピング')
-    quantity = models.IntegerField(verbose_name='数量')
+    quantity = models.IntegerField(verbose_name='数量', validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     class Meta:
         verbose_name = verbose_name_plural = 'トッピング注文'

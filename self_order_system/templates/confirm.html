@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block page_title %}注文確認{% endblock %}
+
+{% block title %}注文確認{% endblock %}
+
+{% block content %}
+<p>注文内容をご確認ください。[注文を確定する]を押してください</p>
+<div>
+  <div>
+    {{ session_order.table_no }}番テーブル
+  </div>
+  <div>
+    <img src="{{ item.image.url }}" style="max-width:100%">
+  </div>
+  <div>
+    {{ item.name }}
+  </div>
+  <div>
+    {% if session_order.toppings %}
+      トッピング:
+      <ul>
+        {% for topping, quantity in topping_and_quantities %}
+          <li>{{ topping.name }} x {{ quantity }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+<form action="{% url 'confirm' %}" method="post">
+  {% csrf_token %}
+  {% include 'form.html' with submit_text="注文を確定する" %}
+</form>
+{% endblock %}

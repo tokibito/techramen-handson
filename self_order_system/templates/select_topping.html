@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block page_title %}トッピング選択{% endblock %}
+
+{% block title %}トッピング選択{% endblock %}
+
+{% block content %}
+<p>トッピングを選んで[次へ]を押してください</p>
+<form action="{% url 'select_topping' %}" method="post">
+  {% csrf_token %}
+  {% include 'form.html' with submit_text="次へ" %}
+</form>
+{% endblock %}

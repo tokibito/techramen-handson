@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page_title %}メニュー{% endblock %}
+
+{% block title %}メニュー{% endblock %}
+
+{% block content %}
+<p>メニューを選んでください</p>
+{% for item, form in item_and_forms %}
+  <div>
+    {{ item.name }} {{ item.price }}円<br>
+    <img src="{{ item.image.url }}" style="max-width:100%">
+  </div>
+  <form action="{% url 'menu' %}" method="post">
+    {% csrf_token %}
+    {% include 'form.html' with submit_text="このメニューを選択して次へ" %}
+  </form>
+{% endfor %}
+{% endblock %}
