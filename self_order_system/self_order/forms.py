@@ -17,7 +17,10 @@ class SelectItemForm(forms.Form):
 class ToppingOrderForm(forms.Form):
     '''トッピングと数量を入力するフォーム'''
     topping = forms.ModelChoiceField(queryset=Topping.objects.all(), label='トッピング')
-    quantity = forms.ChoiceField(choices=[('', '---------')] + [(i, i) for i in range(1, 6)], label='数量')
+    quantity = forms.ChoiceField(
+        choices=[('', '---------')] + [(i, i) for i in range(1, 6)],
+        label='数量'
+    )
 
 
 # トッピングと数量を複数入力するフォーム

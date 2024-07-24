@@ -58,4 +58,9 @@ class Order(models.Model):
     @property
     def total_price(self):
         '''合計金額'''
-        return self.item.price + sum(topping_order.topping.price * topping_order.quantity for topping_order in self.topping_orders.all())
+        topping_orders = self.topping_orders.all()
+        # 商品価格 + トッピング価格
+        price = self.item.price
+        for topping_order in topping_orders:
+            price += topping_order.topping.price * topping_order.quantity
+        return price

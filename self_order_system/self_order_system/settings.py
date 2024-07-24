@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',  # django-debug-toolbar
     'django_bootstrap5',  # django-bootstrap5
     'self_order',  # self_orderアプリケーション
+    'django_extensions',  # django-extensions
 ]
 
 MIDDLEWARE = [
