@@ -165,7 +165,30 @@ Djangoの情報
 今日作成するアプリケーション
 ==========================================
 
+今日、Djangoを使って作ってみるアプリケーションについて説明します。
+
 セルフオーダーシステム
 -----------------------------
 
+最近は飲食店でもよく使われるようになったセルフオーダーシステムを作ります。
 
+完成後のアプリケーションの操作の流れは次の通りです:
+
+1. トップ画面ではテーブル番号を入力
+2. メニューを選ぶ（1つの注文では1個だけ）
+3. トッピングと個数を選ぶ
+4. 確認画面を表示
+5. 完了画面を表示
+6. 管理画面で注文内容を確認できる
+
+.. list-table::
+
+   * - .. image:: images/self-order-top.png
+     - .. image:: images/self-order-menu.png
+     - .. image:: images/self-order-topping.png
+     - .. image:: images/self-order-confirm.png
+     - .. image:: images/self-order-complete.png
+
+.. list-table::
+
+   * - .. image:: images/self-order-admin.png
