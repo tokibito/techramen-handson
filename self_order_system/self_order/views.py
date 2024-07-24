@@ -92,7 +92,7 @@ class ConfirmView(FormView):
         topping_and_quantities = []
         for session_topping_order in session_order.toppings:
             topping = Topping.objects.get(pk=session_topping_order.topping_id)
-            topping_and_quantities.append(topping, session_topping_order.quantity)
+            topping_and_quantities.append((topping, session_topping_order.quantity))
         context['topping_and_quantities'] = topping_and_quantities
         return context
 

@@ -64,7 +64,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             # bootstrap5を適用する場合は次の行のコメントを外す
-            # BASE_DIR / 'templates_bootstrap5',
+            BASE_DIR / 'templates_bootstrap5',
 
             # テンプレートフゕァイルのディレクトリを指定
             BASE_DIR / 'templates',

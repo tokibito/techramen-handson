@@ -7,6 +7,7 @@
 {% block content %}
 <p>メニューを選んでください</p>
 {% for item, form in item_and_forms %}
+  <hr>
   <div>
     {{ item.name }} {{ item.price }}円<br>
     <img src="{{ item.image.url }}" style="max-width:100%">
