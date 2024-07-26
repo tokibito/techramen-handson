@@ -95,7 +95,7 @@ HTML、CSSを使ってウェブページを作ったことがある、Webアプ�
 ハンズオンの進め方
 ---------------------------------
 
-* 講師: 資料と手順の説明を10～15分程度
+* 講師: 資料の手順の説明を10～15分程度。
 * 参加者: 資料の手順通りにコードを打ち込み、手元で動かしてみる 10～15分程度
 
 これを繰り返して進めていく形となります。1時間に1回、休憩の時間を設けますが、トイレなどは随時行って頂いて構いません。
@@ -103,6 +103,8 @@ HTML、CSSを使ってウェブページを作ったことがある、Webアプ�
 コードの入力はすべて打ち込みだとだと時間が足りなくなるので、資料からコピー＆ペーストしても大丈夫です。
 
 不明点は随時質問してください。スムーズに進行できるよう、ご協力をお願いします。
+
+余裕がある人は、手順の説明を待たずに資料の通りにどんどん進めてかまいません。
 
 Djangoを知る
 =====================
@@ -619,6 +621,9 @@ Djangoアプリケーションは、作成しただけではDjangoプロジェ�
 
    このプロジェクトフォルダ内の各フォルダは、 `__init__.py` を含んでいるため、Pythonのモジュールとして ``import`` 文でインポートして読み込むことができる形になっています。
 
+シンプルなテンプレートを使ったページの表示
+============================================
+
 views.pyの編集
 ----------------
 
@@ -656,23 +661,23 @@ self_order/views.py:
 
 .. code-block:: python
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'templates',  # プロジェクトフォルダ内のtemplatesをテンプレートフォルダにする
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+   TEMPLATES = [
+       {
+           'BACKEND': 'django.template.backends.django.DjangoTemplates',
+           'DIRS': [
+               BASE_DIR / 'templates',  # プロジェクトフォルダ内のtemplatesをテンプレートフォルダにする
+           ],
+           'APP_DIRS': True,
+           'OPTIONS': {
+               'context_processors': [
+                   'django.template.context_processors.debug',
+                   'django.template.context_processors.request',
+                   'django.contrib.auth.context_processors.auth',
+                   'django.contrib.messages.context_processors.messages',
+               ],
+           },
+       },
+   ]
 
 .. tip::
 
@@ -687,9 +692,10 @@ HTMLを生成するためのテンプレートファイルとして最初に2つ
 
 templates/base.html:
 
-.. code-block:: django
+.. code-block:: html+django
 
-   <html lang="ja">                                                                                                                <head>
+   <html lang="ja">
+     <head>
        <meta charset="utf-8">
        <title>{% block page_title %}{% endblock %}</title>
      </head>
@@ -758,9 +764,34 @@ self_order_system/urls.py:
    from django.urls import path, include
    
    urlpatterns = [
-       path('admin/', admin.site.urls),
+       path('admin/', admin.site.urls),  # Django管理画面のURL設定(デフォルトで有効)
        path('', include('self_order.urls')),  # self_orderのURLを有効化
    ]
 
+.. tip::
+
+   VSCodeのデバッガーでrunserverを実行中の場合、モジュールの作成途中だとデバッガーがエラーを表示してくることがあります。モジュールを新たに追加していく際には一旦デバッガーは停止しておいたほうが作業がスムーズかもしれません。
+
+トップページを表示してみる
+---------------------------
+
+開発用サーバーを起動して、 http://127.0.0.1:8000/ にアクセスしてみましょう。
+
+.. image:: images/top-hello-world.png
+
+テンプレートを使ったHTMLの表示ができました。
+
+django-debug-toolbarの導入
+=======================================
+
+この後からコードが複雑になるため、django-debug-toolbarを導入します。
+
+* 参考
+
+  * https://docs.djangoproject.com/ja/5.0/intro/tutorial08/
+  * https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+
 django-debug-toolbarの有効化
----------------------------------------
+-------------------------------
+
+django-debug-toolbarの仮想環境へのインストールは済ませてあるので、有効化する設定のみを行います。
