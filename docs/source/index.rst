@@ -234,11 +234,11 @@ VSCodeの拡張機能
 
   * SQLite3データベースファイルのビューワー
 
-VSCodeの拡張機能のインストール済みの一覧に以下の拡張機能があれば大丈夫です。
+VSCodeの拡張機能のインストール済みの一覧に次の拡張機能があれば大丈夫です。
 
 .. image:: images/vscode-extensions.png
 
-.. note:: もしVSCodeで他の拡張機能をたくさんインストールしていて競合してしまう場合は、[ファイル]-[ユーザー設定]-[プロファイル]-[プロファイルの作成]から別のプロファイルを作って作業してください。
+.. tip:: もしVSCodeで他の拡張機能をたくさんインストールしていて競合してしまう場合は、[ファイル]-[ユーザー設定]-[プロファイル]-[プロファイルの作成]から別のプロファイルを作って作業してください。
 
 作業用フォルダ
 -----------------
@@ -285,7 +285,7 @@ Pythonで開発する際、アプリケーションごとに利用するPython�
 
 .. image:: images/terminal-python-version.png
 
-.. note:: Windows用Pythonで利用できる `py` コマンドは、Pythonのバージョンを指定して起動できるランチャーアプリケーションです。 macOSやLinuxの場合は、通常 `python3.x` （x部分はマイナーバージョン）のようなコマンドで複数のバージョンを使い分けます。
+.. tip:: Windows用Pythonで利用できる `py` コマンドは、Pythonのバージョンを指定して起動できるランチャーアプリケーションです。 macOSやLinuxの場合は、通常 `python3.x` （x部分はマイナーバージョン）のようなコマンドで複数のバージョンを使い分けます。
 
 Pythonのバージョンを確認できたら、組み込みの `venv` モジュールを使って、 `venv` という名前のPython仮想環境を作成します。
 
@@ -312,7 +312,7 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
 
 .. image:: images/python-venv-new-terminal.png
 
-.. note::
+.. tip::
 
    VSCodeのPython Environment Managerを使わずに独立したターミナル等で仮想環境を有効にしたい場合は、 `venv` フォルダ以下の仮想環境を有効化するためのスクリプトを実行します。
 
@@ -324,3 +324,72 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
       venv\Scripts\Activate   
 
    .. image:: images/python-venv-activate-terminal.png
+
+サードパーティパッケージのインストール
+-------------------------------------------
+
+今回利用するサードパーティのパッケージは次の通りです。
+
+* Django
+* django-debug-toolbar
+* django-bootstrap5
+
+.. tip::
+
+   Pythonの公式配布パッケージに含まれているモジュールは標準ライブラリ（標準モジュール）と呼びます。
+
+   公式以外の人、組織が作成したパッケージをサードパーティパッケージと呼びます。
+
+   サードパーティ製のパッケージは `Python Package Index(PyPI) <https://pypi.org/>`_ などで配布されています。
+
+仮想環境が有効になっているターミナルで、 `pip` コマンドを使ってインストールします。
+
+.. code-block::
+
+   pip install Django django-debug-toolbar django-bootstrap5
+
+今回バージョンを指定していませんが、Djangoは5.0系を想定しています。
+
+インストールされたパッケージの一覧を確認するには `pip list` コマンドを使います。
+
+.. image:: images/pip-list.png
+
+インストールしたパッケージ一覧はVSCodeの拡張のPython Environment Managerでも確認できます。
+
+.. image:: images/python-venv-manager-packages.png
+
+問題ないことを確認したら、インストールしたパッケージとバージョンの一覧を `requirements.txt` に書き出しておきましょう。
+
+.. code-block::
+
+   pip freeze > requirements.txt
+
+書き込んだらエディタで想定どおりの内容になっているか確認しておきましょう。
+
+.. image:: images/requirements-txt.png
+
+.. tip::
+
+   ターミナルで、コマンドの後ろに ` > ファイル名` のように記述して実行すると、実行したコマンドの標準出力（ターミナルに通常表示される文字）が、画面の変わりにファイルに出力されます。
+
+Djangoプロジェクトの作成と日本語設定
+========================================
+
+Djangoのプロジェクトを作成して、開発用Webサーバーを起動してみます。
+
+Djangoのプロジェクト作成
+------------------------------
+
+Djangoをインストールした仮想環境のターミナルでは管理コマンド `django-admin` を使用できます。
+
+プロジェクトを作成する場合は `startproject` サブコマンドを使います。今回、Djangoのプロジェクト名は `self_order_system` とします。
+
+.. code-block::
+
+   django-admin startproject self_order_system
+
+コマンドが成功するとプロジェクトのファイル群が作成されます。ターミナルには特に表示はでません。
+
+.. image:: images/django-start-project.png
+
+.. image:: images/django-project-structure.png
