@@ -1375,20 +1375,34 @@ self_order/views.py:
    from .session import SessionOrder
    
    def index(request):
-       '''セルフオーダーのトップページ'''
+       '''セルフオーダーのトップ画面'''
        form = forms.TableNoForm(request.POST or None)
        if form.is_valid():
            table_no = form.cleaned_data['table_no']
            # セッションデータ作成
            session_order = SessionOrder(table_no=table_no)
            request.session['session_order'] = session_order.as_dict()
-           # メニューページへリダイレクトする
+           # メニュー画面へリダイレクトする
            return redirect('menu')
        return render(request, 'index.html', {'form': form})
    
    class MenuView(TemplateView):
-       '''メニューページ'''
+       '''メニュー画面'''
        template_name = 'menu.html'
+
+`self_order/urls.py` にメニュー画面のURLを追加します。
+
+self_order/urls.py:
+
+.. code-block:: python
+
+   from django.urls import path
+   from . import views
+   
+   urlpatterns = [
+       path('', views.index, name='index'),  # トップ画面
+       path('menu/', views.MenuView.as_view(), name='menu'),  # メニュー画面
+   ]
 
 .. tip::
 
@@ -1398,7 +1412,44 @@ self_order/views.py:
 
    汎用性を気にするならクラスビューのほうが使いやすいですが、最初は関数ビューで作ってみたほうがわかりやすいかもしれません。
 
-* viewsを書く, urls.py書く
-* テンプレートファイル用意
+トップ画面のテンプレートファイルをフォームが表示されるように書き換えます。
+
+templates/index.html:
+
+.. code-block:: html+django
+
+   {% extends 'base.html' %}
+   
+   {% block page_title %}セルフオーダー{% endblock %}
+   
+   {% block title %}セルフオーダー{% endblock %}
+   
+   {% block content %}
+   <p>テーブル番号を選んで[次へ]を押してください</p>
+   <form action="{% url 'index' %}" method="post">
+     {% csrf_token %}
+     {% include 'form.html' with submit_text="次へ" %}
+   </form>
+   {% endblock %}
+
+また、他の画面でも再利用するフォーム表示部品（フォームの表示とsubmitボタン）を汎用化するために `form.html` というファイルに分割しています。
+
+`templates/form.html` も新規作成しておきます。
+
+templates/form.html:
+
+.. code-block:: html+django
+
+   {{ form }}
+   <div>
+     <button type="submit">{{ submit_text }}</button>
+   </div>
+
+ここまで作成したら、runserverを起動してブラウザで http://127.0.0.1/ にアクセスしてみましょう。
+
+.. image:: images/top-page.png
+
+正常に動作していれば、テーブル番号を選択するドロップダウンと『次へ』ボタンが表示されます。
+
 * ポート転送
 * bootstrap5
