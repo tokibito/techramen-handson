@@ -392,4 +392,59 @@ Djangoをインストールした仮想環境のターミナルでは管理コ�
 
 .. image:: images/django-start-project.png
 
+プロジェクト名として使用した `self_order_system` のフォルダ以下に、 `manage.py` ファイルと `self_order_system` のフォルダが作成され、 `self_order_system` フォルダ内にはいくつかのPythonモジュールが格納されています。
+
+`manage.py` はDjangoプロジェクトの管理コマンドです。django-adminとは用途が異なります。プロジェクト専用のサブコマンドなどを利用できます。
+
+.. tip::
+
+   Djangoフレームワークを使ってWebアプリケーションを作成する場合、1つの **Djangoプロジェクト** の中に、複数の **Djangoアプリケーション** を作成します。
+   「Djangoのプロジェクト」と言った場合は、startprojectサブコマンドで作成した親フォルダとそのフォルダ以下のファイル群を指す場合が多いです。
+
+開発用Webサーバーの起動
+--------------------------------
+
+Djangoのプロジェクトを作成したので、開発用サーバーを動かしてみましょう。
+
+仮想環境のターミナルで `manage.py` があるフォルダに `cd` コマンドで移動してから、 `python manage.py runserver` コマンドを実行します。
+
+.. code-block::
+
+   cd self_order_system
+   python manage.py runserver
+
+正常にコマンドが実行された場合、開発用サーバーが起動した旨のメッセージが表示されます。
+
+.. image:: images/django-runserver.png
+
+メッセージに書かれている通り、 http://127.0.0.1:8000/ にWebブラウザでアクセスしてみましょう。成功すればDjangoが動作した画面が表示されます。
+
+.. image:: images/django-worked-en.png
+
+起動した開発用サーバーを停止する場合は、コマンドをキャンセルします。 Windowsの場合はターミナルでCtrl+Break（[Ctrl]と[Break]キーを同時押し）、またはCtrl+Cを入力します。
+
+VSCodeのデバッガー設定
+--------------------------------
+
+VSCodeで実行する場合は、VSCodeのデバッガー機能を利用したほうが開発しやすい場合が多いです。
+
+Djangoの開発用サーバー（runserver）の実行をVSCodeからできるように設定してみましょう。
+
+VSCodeのメニューから [実行]-[構成の追加] を選択すると、VSCode上部でデバッガーを選択するドロップダウンメニューが表示されます。
+
+ドロップダウンメニューから [Python Debugger]-[Django] を選ぶと、 `manage.py` ファイルの場所を訊ねてくるので、候補として表示されている項目を選びます。
+
+.. image:: images/vscode-debugger-manage.png
+
+ここまでを行うと、 `.vscode` フォルダの中に `launch.json` というファイルが作成されます。これはVSCodeのデバッグ構成の設定ファイルです。
+
+これでデバッガーの設定は完了です。試してみましょう。
+
+ターミナルで起動していたrunserverコマンドがあれば停止をしてから、VSCodeでメニューから [実行]-[デバッグの開始] を選択、またはショートカットのF5キーを押します。
+
+.. image:: images/vscode-debugger.png
+
+日本語化
+----------------
+
 .. image:: images/django-project-structure.png
