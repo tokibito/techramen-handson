@@ -83,10 +83,14 @@ HTML、CSSを使ってウェブページを作ったことがある、Webアプ�
   * Pythonの文法の詳しい説明
   * HTML、CSSの文法の詳しい説明
   * Djangoの各機能の詳しい説明
+  * SQLやデータベースの詳しい説明
+  * ターミナルコマンドの使い方や詳しい説明
 
-『Djangoを使ってアプリケーションを開発する流れ』を経験してもらうことが一番の目的です。
+『Djangoを使ってWebアプリケーションを開発する流れ』を経験してもらうことが一番の目的です。
 
-一度アプリケーションを完成まで作る手順を経験しておけば、書籍や他のDjangoのチュートリアルで学習するのもスムーズになると思います。
+各手順の大まかな意味は説明しますが、コードの詳細についての説明は時間が足りないので省略します。
+
+一度Webアプリケーションを完成まで作る手順を経験しておき、書籍や他のDjangoのチュートリアルで学習するきっかけとしてください。
 
 ハンズオンの進め方
 ---------------------------------
@@ -96,7 +100,7 @@ HTML、CSSを使ってウェブページを作ったことがある、Webアプ�
 
 これを繰り返して進めていく形となります。1時間に1回、休憩の時間を設けますが、トイレなどは随時行って頂いて構いません。
 
-コードの入力はすべて打ち込みだとだと時間がかかるので、資料からコピー＆ペーストしても大丈夫です。
+コードの入力はすべて打ち込みだとだと時間が足りなくなるので、資料からコピー＆ペーストしても大丈夫です。
 
 不明点は随時質問してください。スムーズに進行できるよう、ご協力をお願いします。
 
@@ -151,7 +155,8 @@ Djangoの情報
   * 公式ドキュメント（日本語）: https://docs.djangoproject.com/ja/5.0/
 
     * 日本語ドキュメントの文量はかなり多いです。
-    * 有志の方が日本語翻訳をしてくれていますが、全文が翻訳済みというわけではない点に注意。
+    * 有志の方が日本語翻訳をしてくれていますが、全文が翻訳済みというわけではない点に注意してください。
+    * 公式ドキュメントにはDjangoの基本機能を使うチュートリアルがあります。このハンズオンのあとにやってみると、より理解が深まると思います。
 
 * 書籍
 
@@ -168,37 +173,6 @@ Djangoの情報
 * 情報収集の参考記事
 
   * https://kimihito.hatenablog.com/entry/2023/09/22/164521
-
-今日作成するアプリケーション
-==========================================
-
-今日、Djangoを使って作ってみるアプリケーションについて説明します。
-
-セルフオーダーシステム
------------------------------
-
-最近は飲食店でもよく使われるようになったセルフオーダーシステムを作ります。
-
-完成後のアプリケーションの操作の流れは次の通りです:
-
-1. トップ画面ではテーブル番号を入力
-2. メニューを選ぶ（1つの注文では1個だけ）
-3. トッピングと個数を選ぶ
-4. 確認画面を表示
-5. 完了画面を表示
-6. 管理画面で注文内容を確認できる
-
-.. list-table::
-
-   * - .. image:: images/self-order-top.png
-     - .. image:: images/self-order-menu.png
-     - .. image:: images/self-order-topping.png
-     - .. image:: images/self-order-confirm.png
-     - .. image:: images/self-order-complete.png
-
-.. list-table::
-
-   * - .. image:: images/self-order-admin.png
 
 開発環境の準備
 ===================
@@ -413,6 +387,13 @@ Djangoのプロジェクトを作成したので、開発用サーバーを動�
    cd self_order_system
    python manage.py runserver
 
+.. tip::
+
+   ``python manage.py ...`` という管理コマンドはこのあと何度も出てきます。 `manage.py` ファイルが存在するフォルダにcdコマンドで移動してから実行するものだと思ってください。
+
+   * ``cd`` コマンド: カレントフォルダを変更します。
+   * ``ls`` コマンド: フォルダ内のファイル一覧を表示します。
+
 正常にコマンドが実行された場合、開発用サーバーが起動した旨のメッセージが表示されます。
 
 .. image:: images/django-runserver.png
@@ -480,7 +461,7 @@ Django内部で現在日時を取得した場合に、このタイムゾーン�
 
 デフォルト値は ``UTC`` となっています。日本のタイムゾーンである ``Asia/Tokyo`` に変更します。
 
-この設定はすぐに動作を確認するのが難しいので管理画面でデータを作ったときにでも確認しましょう。
+この設定が機能しているかは、後ほど管理画面で確認しましょう。
 
 Django管理画面を利用する
 =============================
@@ -540,6 +521,246 @@ DjangoでSQLiteを使う場合はテーブルを作成する際に自動的に�
 
 .. image:: images/django-admin.png
 
+ログインすると、グループとユーザーの2つの管理項目が表示されています。
 
+``ユーザー`` を選択して画面から、作成しておいたユーザー（この例では ``ramen`` ）の項目を選択し、編集画面に移動します。
 
-.. image:: images/django-project-structure.png
+この編集画面ではデータベースに登録されているユーザーの情報を編集できます。
+
+画面をスクロールして一番下にある『最終ログイン:』の時刻を確認してください。日本時間で先ほどログインした時刻と一致していますか？
+
+一致している場合は、 `settings.py` の ``TIME_ZONE`` 設定がうまく機能しています。
+
+管理画面の確認は一旦ここまでにしましょう。次はいよいよDjangoのアプリケーションを作り始めます。
+
+今日作成するWebアプリケーション
+==========================================
+
+今日、Djangoを使って作ってみるWebアプリケーションについて説明します。
+
+セルフオーダーシステム
+-----------------------------
+
+最近は飲食店でもよく使われるようになったセルフオーダーシステムを作ります。
+
+完成後のアプリケーションの操作の流れは次の通りです:
+
+1. トップ画面ではテーブル番号を入力
+2. メニューを選ぶ（1つの注文では1個だけ）
+3. トッピングと個数を選ぶ
+4. 確認画面を表示
+5. 完了画面を表示
+6. 管理画面で注文内容を確認できる
+
+.. list-table::
+
+   * - .. image:: images/self-order-top.png
+     - .. image:: images/self-order-menu.png
+     - .. image:: images/self-order-topping.png
+     - .. image:: images/self-order-confirm.png
+     - .. image:: images/self-order-complete.png
+
+.. list-table::
+
+   * - .. image:: images/self-order-admin.png
+
+Djangoアプリケーションの作成と有効化
+=========================================
+
+Djangoのプロジェクトは、複数のDjangoアプリケーションを組み合わせてシステムを構成します。
+
+Djangoアプリケーションを作成して、まずはトップページを表示してみましょう。
+
+self_orderアプリケーションを作成
+----------------------------------------
+
+セルフオーダーシステムのほとんど全部のコードを含むDjangoのアプリケーションとして、 ``self_order`` という名前で作成します。
+
+``python manage.py startapp`` コマンドを使用します。
+
+.. code-block::
+
+   python manage.py startapp self_order
+
+コマンドが成功すると `self_order` フォルダが作成されます。これがDjangoアプリケーションです。DjangoアプリケーションはPythonのモジュールの一種ですので、 `__init__.py` ファイルがフォルダに含まれています。
+
+他にもいくつかのファイルが含まれていますが、編集する際に説明していきます。
+
+self_orderアプリケーションを有効化
+----------------------------------------
+
+Djangoアプリケーションは、作成しただけではDjangoプロジェクト内で有効になりません。
+
+`settings.py` ファイルの設定を変更して有効にする必要があります。 ``INSTALLED_APPS`` の項目を探して編集します。
+
+.. code-block:: python
+
+   INSTALLED_APPS = [
+       'django.contrib.admin',
+       'django.contrib.auth',
+       'django.contrib.contenttypes',
+       'django.contrib.sessions',
+       'django.contrib.messages',
+       'django.contrib.staticfiles',
+       'self_order',  # self_orderアプリケーションを有効化
+   ]
+
+これで ``self_order`` が有効になりました。
+
+.. tip::
+
+   Djangoのプロジェクトでは、プロジェクトフォルダの中に、プロジェクト名と同名のフォルダがあり、その中にプロジェクトの設定ファイル（`settings.py`）やプロジェクト全体のURL設定（`urls.py`）などがあります。
+
+   Djangoアプリケーションを作成すると、プロジェクトフォルダ内にアプリケーション用のフォルダが作られます。
+
+   プロジェクトフォルダ内には複数のDjangoアプリケーションが配置される構造になります。
+
+   .. image:: images/django-project-structure.png
+
+   このプロジェクトフォルダ内の各フォルダは、 `__init__.py` を含んでいるため、Pythonのモジュールとして ``import`` 文でインポートして読み込むことができる形になっています。
+
+views.pyの編集
+----------------
+
+まずはシンプルなHTMLを表示するだけのトップ画面の処理を作っていきましょう。
+
+`self_order/views.py` を編集します。
+
+self_order/views.py:
+
+.. code-block:: python
+
+   from django.shortcuts import render
+
+   def index(request):
+       '''セルフオーダーのトップページ'''
+       return render(request, 'index.html')
+
+``index`` はPythonの関数です。引数 ``request`` はDjangoフレームワークから渡されてくるHTTPリクエストを抽象化したPythonのオブジェクトです。
+
+``render`` 関数は、Djangoでテンプレートファイルを使ってHTTPレスポンスを生成するショートカット関数です。
+
+* 参考
+
+  * https://docs.djangoproject.com/ja/5.0/ref/request-response/
+  * https://docs.djangoproject.com/ja/5.0/topics/http/shortcuts/
+
+テンプレートフォルダの作成と有効化
+--------------------------------------
+
+プロジェクトフォルダである `self_order_system` の中に `templates` というフォルダを作成します。
+
+この `templates` フォルダにDjangoのテンプレートファイルを作成していきます。
+
+テンプレートファイルの検索対象のフォルダとするため、 `settings.py` の ``TEMPLATES`` を変更します。
+
+.. code-block:: python
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR / 'templates',  # プロジェクトフォルダ内のtemplatesをテンプレートフォルダにする
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+.. tip::
+
+   テンプレートファイルを配置するフォルダについてはいろいろな流派があります。Djangoアプリケーション内に配置する、プロジェクトフォルダの外側に配置するなど...
+
+   ここでは1つのフォルダ以下に一旦テンプレートファイルをまとめるため、新たに作成した `templates` フォルダを使うことにしています。
+
+テンプレートファイルの作成
+----------------------------------------
+
+HTMLを生成するためのテンプレートファイルとして最初に2つ作成します。
+
+templates/base.html:
+
+.. code-block:: django
+
+   <html lang="ja">                                                                                                                <head>
+       <meta charset="utf-8">
+       <title>{% block page_title %}{% endblock %}</title>
+     </head>
+     <body>
+       <h1>{% block title %}タイトル{% endblock %}</h1>
+       <div>
+         {% block content %}コンテンツ{% endblock %}
+       </div>
+     </body>
+   </html>
+
+templates/index.html:
+
+.. code-block:: django
+
+   {% extends 'base.html' %}
+
+   {% block page_title %}ブラウザに表示されるタイトル{% endblock %}
+
+   {% block title %}h1タグ内のタイトル{% endblock %}
+
+   {% block content %}
+   <p>divタグ内のコンテンツ</p>
+   {% endblock %}
+
+`index.html` から `base.html` を利用しています。 ``{% extends 'base.html' %}`` という記述に注目してください。Djangoの **テンプレート継承** 機能を使っています。
+
+`index.html` は、 `base.html` の内容を流用しつつ、 ``{% block ... %}{% endblock %}`` の部分だけを書き換えたテンプレートファイルである、という意味になっています。
+
+.. tip::
+
+   テンプレート継承とレンダリング結果のイメージ図:
+
+   .. image:: images/django-template-extends.png
+
+* 参考:
+
+  * https://docs.djangoproject.com/ja/5.0/topics/templates/
+  * https://tokibito.hatenablog.com/entry/2024/03/01/223249
+
+urls.pyの作成とプロジェクトルートのURL設定
+------------------------------------------------
+
+トップページのURL設定を準備します。
+
+`self_order` フォルダの中に `urls.py` という名前のファイルを新規作成します。
+
+self_order/urls.py:
+
+.. code-block:: python
+
+   from django.urls import path
+   from . import views
+
+   urlpatterns = [
+       path('', views.index, name='index'),
+   ]
+
+この `self_order` アプリケーションのURL定義をプロジェクト内で有効にするため、既存のファイルである `self_order_system/urls.py` を編集します。
+
+self_order_system/urls.py:
+
+.. code-block:: python
+
+   from django.contrib import admin
+   from django.urls import path, include
+   
+   urlpatterns = [
+       path('admin/', admin.site.urls),
+       path('', include('self_order.urls')),  # self_orderのURLを有効化
+   ]
+
+django-debug-toolbarの有効化
+---------------------------------------
