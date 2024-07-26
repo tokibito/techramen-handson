@@ -289,8 +289,38 @@ Pythonで開発する際、アプリケーションごとに利用するPython�
 
 Pythonのバージョンを確認できたら、組み込みの `venv` モジュールを使って、 `venv` という名前のPython仮想環境を作成します。
 
-.. code-block:: bash
+.. code-block::
 
    py -3.12 -m venv venv
 
 Pythonコマンドを表す `py -3.12` の部分はOSごとに異なる部分ですので、macOSやLinuxを利用している場合は適宜変更してください。
+
+仮想環境の有効化
+---------------------
+
+VSCodeにPython Environment Managerをインストールしている場合、この拡張機能の画面から作成した仮想環境（venv）を有効にできます。
+
+拡張機能の画面を開いて、検出されたvenvの横にあるスターのアイコンをクリックします。マウスオーバーで `Set as active workspace interpreter` という表示が出るアイコンです。
+
+ワークスペースでアクティブ状態のPythonインタープリターとして設定すると、新たに開いたターミナルは仮想環境が有効になっています。
+
+.. image:: images/python-venv-manager.png
+
+メニューの[ターミナル]-[新しいターミナル]で、ターミナルを1つ新しく開いて確認してみましょう。
+
+`(venv)` の表示が出ていれば仮想環境が有効になっています。 `python -V` コマンドでPythonバージョンが想定通りになっているか確認しておきましょう。
+
+.. image:: images/python-venv-new-terminal.png
+
+.. note::
+
+   VSCodeのPython Environment Managerを使わずに独立したターミナル等で仮想環境を有効にしたい場合は、 `venv` フォルダ以下の仮想環境を有効化するためのスクリプトを実行します。
+
+   Windows(PowerShell)の場合: `venv\Scripts\Activate`
+   macOS、Linuxの場合: `venv/scripts/activate`
+
+   .. code-block::
+
+      venv\Scripts\Activate   
+
+   .. image:: images/python-venv-activate-terminal.png
