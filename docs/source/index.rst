@@ -1279,9 +1279,11 @@ Djangoではセッション機能はデフォルトで有効になっており�
 
 現在のDjangoのデフォルト設定では、セッションデータはJSON形式にエンコードできる型だけを扱えます。
 
-セッションに保存するデータは、Pythonの数値型、文字列型、リスト型、辞書型に変換してから ``django.session`` に保持する形とすると、トラブルが少ないです。
+セッションに保存するデータは、Pythonの数値型、文字列型、リスト型、辞書型に変換してから ``request.session`` に保持する形とすると、トラブルが少ないです。
 
-そこで、セッションデータを辞書、Pythonのクラスで相互変換するユーティリティクラスを用意
+`views.py` に記述するアプリケーションの処理では構造化したオブジェクトで扱いつつ、 ``request.session`` に保存する際に手軽に辞書するような、相互に変換する機能を持つPythonのクラスを作成してみます。
+
+注文データを表現する ``SessionOrder`` と、トッピング注文データを表現する ``SessionToppingOrder`` の2つです。
 
 self_order/session.py
 
@@ -1329,3 +1331,74 @@ self_order/session.py
                toppings.append(SessionToppingOrder.from_dict(topping_data))
            instance.toppings = toppings
            return instance
+
+これはDjangoの機能には依存しておらず、Pythonの ``dataclasses`` モジュールを利用しています。
+
+Djangoシェルで試すと次のような動作になります。
+
+.. code-block:: python
+
+   from self_order.session import SessionOrder, SessionToppingOrder
+   data = {
+       'table_no': 1,
+       'item_id': 2,
+       'toppings': [
+           {'topping_id': 1, 'quantity': 2},
+           {'topping_id': 2, 'quantity': 1},
+       ]
+   }
+   s = SessionOrder.from_dict(data)
+   s
+   s.as_dict()
+
+``from_dict`` と ``as_dict`` で相互に変換します。
+
+.. image:: images/session-order.png
+
+このセッションにPythonの辞書に変換するクラスをトップページに組み込んで、セッションを使った実装をしていきます。
+
+トップ画面でフォームとセッションを利用する
+------------------------------------------------------
+
+トップ画面に作成したフォームとセッションを組み込みます。
+
+また、トップ画面のフォーム送信完了後のリダイレクト先として、メニュー画面も必要になるので、一緒に雛形だけ用意します。
+
+self_order/views.py:
+
+.. code-block:: python
+
+   from django.shortcuts import render, redirect
+   from django.views.generic import TemplateView
+   
+   from . import forms
+   from .session import SessionOrder
+   
+   def index(request):
+       '''セルフオーダーのトップページ'''
+       form = forms.TableNoForm(request.POST or None)
+       if form.is_valid():
+           table_no = form.cleaned_data['table_no']
+           # セッションデータ作成
+           session_order = SessionOrder(table_no=table_no)
+           request.session['session_order'] = session_order.as_dict()
+           # メニューページへリダイレクトする
+           return redirect('menu')
+       return render(request, 'index.html', {'form': form})
+   
+   class MenuView(TemplateView):
+       '''メニューページ'''
+       template_name = 'menu.html'
+
+.. tip::
+
+   index関数のように関数で実装されたビューを関数ビュー、MenuItemクラスのようにTemplateViewなどのクラスを継承して実装されたビューをクラスビューと呼びます。
+
+   Djangoではどちらの書き方でも動作します。
+
+   汎用性を気にするならクラスビューのほうが使いやすいですが、最初は関数ビューで作ってみたほうがわかりやすいかもしれません。
+
+* viewsを書く, urls.py書く
+* テンプレートファイル用意
+* ポート転送
+* bootstrap5
