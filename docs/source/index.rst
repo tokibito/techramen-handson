@@ -1451,5 +1451,126 @@ templates/form.html:
 
 正常に動作していれば、テーブル番号を選択するドロップダウンと『次へ』ボタンが表示されます。
 
-* ポート転送
-* bootstrap5
+ポート転送機能で外部端末から動作確認
+=============================================
+
+画面を動かせるようになってきたので、スマートフォンで確認できるようにしてみます。
+
+VSCodeにはポート転送機能があり、ローカル環境で起動しているWebサーバーにインターネット経由で接続することができます。
+
+この機能を使用するためには、GitHubアカウントが必要です。
+
+ポート転送を有効にする
+--------------------------
+
+VSCodeでターミナルが表示されているパネルに『ポート』というタブがあります。
+
+.. image:: images/port-forwarding-start.png
+
+『ポートの転送』をクリックします。
+
+ポート番号の入力を求められるので、Djangoのrunserverの起動ポートである ``8000`` を指定します。
+
+初回は認可画面がいくつか表示されるので、すべて許可をします。
+
+アドレスが割当てられてポート転送が開始されると、接続可能なURLが表示されます。
+
+.. image:: images/port-forwarding.png
+
+パソコンのブラウザから開いて開いてみましょう。初回は認可画面が表示されるかもしれません。
+
+.. image:: images/port-forwarding-pc.png
+
+スマートフォンでアクセスしてみる
+----------------------------------------
+
+表示範囲を公開にすると、アドレスを知っている人が誰でもアクセス可能です。
+
+表示範囲を変更してスマートフォンで試しましょう。右クリックメニューから [ポートの表示範囲]-[公開] を選択します。
+
+.. image:: images/port-forwarding-visiblity.png
+
+表示範囲が切り替わったら、ブラウザの右クリックメニューで『このページのQRコードを作成』を選んでURLのQRコードを作成し、スマートフォンのQRコードリーダーで読み込んでみましょう。
+
+.. image:: images/toppage-sp-default.png
+
+スマートフォンから画面を確認できました。ビューポートの設定などが無いので小さめに表示されます。
+
+django-bootstrap5の導入
+=====================================
+
+スマートフォンでも見た目がよくなるように `Bootstrap5 <https://getbootstrap.jp/>`_ を導入してみましょう
+
+DjangoからBootstrap5を使う方法はいくつかありますが、 `django-bootstrap5 <https://django-bootstrap5.readthedocs.io/en/latest/>`_ を使うのが簡単です。
+
+すでにインストールはしてあるので、有効化の設定とテンプレートファイルの作成を行います。
+
+`settings.py` の ``INSTALLED_APPS`` に ``'django_bootstrap5',`` を追加します。
+
+.. code-block:: python
+
+   INSTALLED_APPS = [
+       'django.contrib.admin',
+       'django.contrib.auth',
+       'django.contrib.contenttypes',
+       'django.contrib.sessions',
+       'django.contrib.messages',
+       'django.contrib.staticfiles',
+       'self_order',  # self_orderアプリケーションを有効化
+       'debug_toolbar',  # django-debug-toolbar
+       'django_bootstrap5',  # django-bootstrap5
+   ]
+
+テンプレートファイルを継承して使うため、 `bootstrap.html` を作成します。
+
+templates/bootstrap.html:
+
+.. code-block:: html+django
+
+   {% extends 'django_bootstrap5/bootstrap5.html' %}
+
+   {% block bootstrap5_title %}{% block page_title %}{% endblock %}{% endblock %}
+
+`base.html` の内容も変更します。
+
+templates/base.html:
+
+.. code-block:: html+django
+
+   {% extends 'bootstrap.html' %}
+   
+   {% load django_bootstrap5 %}
+   
+   {% block bootstrap5_content %}
+   <div class="container">
+       <h1>{% block title %}(no title){% endblock %}</h1>
+   
+       {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+   
+       {% block content %}(no content){% endblock %}
+   </div>
+   {% endblock %}
+
+`form.html` も変更します。
+
+templates/form.html:
+
+.. code-block:: html+django
+
+   {% load django_bootstrap5 %}
+   
+   {% if form.management_form %}
+     {% bootstrap_formset form layout='horizontal' %}
+   {% else %}
+     {% bootstrap_form form layout='horizontal' %}
+   {% endif %}
+   
+   <div>
+     {% bootstrap_button button_type="submit" content=submit_text %}
+   </div>
+
+これでスマートフォンから再度確認すると、Bootstrap5が適用されて見やすくなりました。
+
+.. image:: images/bootstrap5.png
+
+
