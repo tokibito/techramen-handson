@@ -245,7 +245,7 @@ VSCodeの拡張機能のインストール済みの一覧に次の拡張機能�
 
 開発を始める際には、作業用フォルダを1つ作っておき、そこから作業をはじめるとファイルが散らばらないのでおすすめです。
 
-今回はデスクトップに `techramen` という名前のフォルダを作って、これを作業用フォルダとして使います。
+今回はデスクトップに ``techramen`` という名前のフォルダを作って、これを作業用フォルダとして使います。
 
 デスクトップにフォルダを作ったら、VSCodeにフォルダをドラッグアンドドロップしてください。VSCodeでフォルダを開いた状態になるはずです。
 
@@ -269,31 +269,31 @@ Pythonで開発する際、アプリケーションごとに利用するPython�
 
 こういった場合に、『Python仮想環境』を作成することで毎回パッケージをインストールしなおす必要はなくなり、環境を切り替えるのが楽になります。
 
-まずはターミナルでPythonのバージョンを確認しましょう。 `-V` オプションが
+まずはターミナルでPythonのバージョンを確認しましょう。 ``-V`` オプションが
 
-* Windowsの場合: `py -3 -V`
-* macOSの場合: `python3 -V`
-* Linuxの場合: `python3 -V`
+* Windowsの場合: ``py -3 -V``
+* macOSの場合: ``python3 -V``
+* Linuxの場合: ``python3 -V``
 
 表示されたバージョンは、今回使おうとしているPythonバージョンと一致していますか？
 
 もし一致しない場合は、マイナーバージョンを明示的にしていすると、該当のバージョンのPythonを起動できます。
 
-* Windowsの場合: `py -3.12 -V`
-* macOSの場合: `python3.12 -V`
-* Linuxの場合: `python3.12 -V`
+* Windowsの場合: ``py -3.12 -V``
+* macOSの場合: ``python3.12 -V``
+* Linuxの場合: ``python3.12 -V``
 
 .. image:: images/terminal-python-version.png
 
-.. tip:: Windows用Pythonで利用できる `py` コマンドは、Pythonのバージョンを指定して起動できるランチャーアプリケーションです。 macOSやLinuxの場合は、通常 `python3.x` （x部分はマイナーバージョン）のようなコマンドで複数のバージョンを使い分けます。
+.. tip:: Windows用Pythonで利用できる ``py`` コマンドは、Pythonのバージョンを指定して起動できるランチャーアプリケーションです。 macOSやLinuxの場合は、通常 `python3.x` （x部分はマイナーバージョン）のようなコマンドで複数のバージョンを使い分けます。
 
-Pythonのバージョンを確認できたら、組み込みの `venv` モジュールを使って、 `venv` という名前のPython仮想環境を作成します。
+Pythonのバージョンを確認できたら、組み込みの ``venv`` モジュールを使って、 ``venv`` という名前のPython仮想環境を作成します。
 
 .. code-block::
 
    py -3.12 -m venv venv
 
-Pythonコマンドを表す `py -3.12` の部分はOSごとに異なる部分ですので、macOSやLinuxを利用している場合は適宜変更してください。
+Pythonコマンドを表す ``py -3.12`` の部分はOSごとに異なる部分ですので、macOSやLinuxを利用している場合は適宜変更してください。
 
 仮想環境の有効化
 ---------------------
@@ -308,7 +308,7 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
 
 メニューの[ターミナル]-[新しいターミナル]で、ターミナルを1つ新しく開いて確認してみましょう。
 
-`(venv)` の表示が出ていれば仮想環境が有効になっています。 `python -V` コマンドでPythonバージョンが想定通りになっているか確認しておきましょう。
+``(venv)`` の表示が出ていれば仮想環境が有効になっています。 ``python -V`` コマンドでPythonバージョンが想定通りになっているか確認しておきましょう。
 
 .. image:: images/python-venv-new-terminal.png
 
@@ -316,8 +316,8 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
 
    VSCodeのPython Environment Managerを使わずに独立したターミナル等で仮想環境を有効にしたい場合は、 `venv` フォルダ以下の仮想環境を有効化するためのスクリプトを実行します。
 
-   Windows(PowerShell)の場合: `venv\Scripts\Activate`
-   macOS、Linuxの場合: `venv/scripts/activate`
+   Windows(PowerShell)の場合: ``venv\Scripts\Activate``
+   macOS、Linuxの場合: ``source venv/scripts/activate``
 
    .. code-block::
 
@@ -350,7 +350,7 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
 
 今回バージョンを指定していませんが、Djangoは5.0系を想定しています。
 
-インストールされたパッケージの一覧を確認するには `pip list` コマンドを使います。
+インストールされたパッケージの一覧を確認するには ``pip list`` コマンドを使います。
 
 .. image:: images/pip-list.png
 
@@ -370,9 +370,9 @@ VSCodeにPython Environment Managerをインストールしている場合、こ
 
 .. tip::
 
-   ターミナルで、コマンドの後ろに ` > ファイル名` のように記述して実行すると、実行したコマンドの標準出力（ターミナルに通常表示される文字）が、画面の変わりにファイルに出力されます。
+   ターミナルで、コマンドの後ろに `` > ファイル名`` のように記述して実行すると、実行したコマンドの標準出力（ターミナルに通常表示される文字）が、画面の変わりにファイルに出力されます。
 
-Djangoプロジェクトの作成と日本語設定
+Djangoプロジェクトの作成と設定
 ========================================
 
 Djangoのプロジェクトを作成して、開発用Webサーバーを起動してみます。
@@ -380,9 +380,9 @@ Djangoのプロジェクトを作成して、開発用Webサーバーを起動�
 Djangoのプロジェクト作成
 ------------------------------
 
-Djangoをインストールした仮想環境のターミナルでは管理コマンド `django-admin` を使用できます。
+Djangoをインストールした仮想環境のターミナルでは管理コマンド ``django-admin`` を使用できます。
 
-プロジェクトを作成する場合は `startproject` サブコマンドを使います。今回、Djangoのプロジェクト名は `self_order_system` とします。
+プロジェクトを作成する場合はサブコマンドの ``startproject`` を使います。今回、Djangoのプロジェクト名は ``self_order_system`` とします。
 
 .. code-block::
 
@@ -392,7 +392,7 @@ Djangoをインストールした仮想環境のターミナルでは管理コ�
 
 .. image:: images/django-start-project.png
 
-プロジェクト名として使用した `self_order_system` のフォルダ以下に、 `manage.py` ファイルと `self_order_system` のフォルダが作成され、 `self_order_system` フォルダ内にはいくつかのPythonモジュールが格納されています。
+プロジェクト名として使用した ``self_order_system`` のフォルダ以下に、 `manage.py` ファイルと ``self_order_system`` のフォルダが作成され、 ``self_order_system`` フォルダ内にはいくつかのPythonモジュールが格納されています。
 
 `manage.py` はDjangoプロジェクトの管理コマンドです。django-adminとは用途が異なります。プロジェクト専用のサブコマンドなどを利用できます。
 
@@ -406,7 +406,7 @@ Djangoをインストールした仮想環境のターミナルでは管理コ�
 
 Djangoのプロジェクトを作成したので、開発用サーバーを動かしてみましょう。
 
-仮想環境のターミナルで `manage.py` があるフォルダに `cd` コマンドで移動してから、 `python manage.py runserver` コマンドを実行します。
+仮想環境のターミナルで `manage.py` があるフォルダに ``cd`` コマンドで移動してから、 ``python manage.py runserver`` コマンドを実行します。
 
 .. code-block::
 
@@ -444,7 +444,102 @@ VSCodeのメニューから [実行]-[構成の追加] を選択すると、VSCo
 
 .. image:: images/vscode-debugger.png
 
+ターミナルから実行したのと同様に、Webブラウザで http://127.0.0.1:8000/ にアクセスして表示されることを確認しておきましょう。
+
 日本語化
 ----------------
+
+Djangoは標準で日本語に対応しています。
+
+`self_order_system/self_order_system/settings.py` ファイルをエディタで開いて、 ``LANGUAGE_CODE`` の項目を探します。
+
+デフォルト値は ``en-us`` となっています。 ``ja`` に変更します。
+
+変更したら開発用サーバーを起動して、 http://127.0.0.1:8000/ にアクセスしてみましょう。
+
+.. image:: images/django-worked-ja.png
+
+日本語で表示されましたか？
+
+言語設定を日本語に変更すると、このようにDjangoの内部に含まれるテキストも日本語で表示されます。
+
+管理画面や入力検証機能のメッセージ表示も日本語になるので、日本語で運用するのが前提のシステムでも採用しやすいです。
+
+`settings.py` ファイルはDjangoの設定を変更する際に編集します。この後にも何度も出てくるので、『Djangoの設定を変更する場合はsettings.py』と覚えておいてください。
+
+タイムゾーンの設定
+-----------------------
+
+もう一つ、最初の設定として、タイムゾーンを変更しておきましょう。
+
+DjangoはデフォルトではタイムゾーンがUTC（世界標準時）に設定されています。
+
+Django内部で現在日時を取得した場合に、このタイムゾーン設定が使われます。
+
+`settings.py` で ``TIME_ZONE`` を探します。
+
+デフォルト値は ``UTC`` となっています。日本のタイムゾーンである ``Asia/Tokyo`` に変更します。
+
+この設定はすぐに動作を確認するのが難しいので管理画面でデータを作ったときにでも確認しましょう。
+
+Django管理画面を利用する
+=============================
+
+データベースの作成
+---------------------
+
+Djangoプロジェクトはデフォルトで `SQLite <https://www.sqlite.org/>`_ のデータベースを使う設定になっています。
+
+SQLiteは1つのファイルに複数のデータベーステーブルを保存できるソフトウェアです。
+
+また、デフォルトでユーザー認証と管理画面のDjangoアプリケーションが有効になっており、これらの機能を使うためにはデータベース内のテーブルにデータを登録しておく必要があります。
+
+早速データベースを作成しましょう。
+
+DjangoでSQLiteを使う場合はテーブルを作成する際に自動的にデータベースファイルが作成されます。
+
+データベーステーブルを作成する ``python manage.py migrate`` コマンドを実行します。
+
+.. code-block::
+
+   python manage.py migrate
+
+`db.sqlite3` というファイルが作成されました。VSCodeの拡張機能でSQLite Viewerをインストールしているので、ファイルの開くとテーブルが作成されていることを確認できます。
+
+.. image:: images/vscode-sqlite-viewer.png
+
+.. tip::
+
+   DjangoのSQLiteデータベースの読み書きは、Pythonの標準モジュールで実現しています。他のデータベースソフトウェアに接続する場合は、各データベースごとに対応したデータベースドライバー（Pythonのサードパーティパッケージ）のインストールが必要になります。
+
+管理ユーザーの作成
+---------------------
+
+管理画面にログインするためのユーザーを作成しましょう。
+
+`manage.py` のサブコマンドで `createsuperuser` コマンドを使用します。
+
+.. code-block::
+
+   python manage.py createsuperuser
+
+.. image:: images/django-createsuperuser.png
+
+作成するユーザーのユーザー名、メールアドレス、パスワードを訊ねてきます。メールアドレスは空でも大丈夫です。
+
+パスワードの強度が低いと警告が表示されますがローカル環境だけで開発に使うデータベースであれば、警告を無視してユーザーを作成することもできます。
+
+管理画面にログインする
+---------------------------
+
+デフォルトでDjango管理画面は有効になっています。開発用サーバーを起動した状態で http://127.0.0.1:8000/admin/ に接続してみましょう。ログイン画面が表示されるはずです。
+
+.. image:: images/django-admin-login.png
+
+先ほど ``createsuperuser`` コマンドで作成したユーザーでログインできます。
+
+.. image:: images/django-admin.png
+
+
 
 .. image:: images/django-project-structure.png
