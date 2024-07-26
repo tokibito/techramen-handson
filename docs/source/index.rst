@@ -1110,3 +1110,42 @@ SELF_ORDERというグループで、各モデルの項目が表示されまし�
    このラーメンとチャーハンの画像はBingのCopilotを使って生成しています。
 
    生成AIぽさがよく出ている画像なのでツッコミどころはたくさんあります。
+
+ここでは商品を次のように登録してみました。
+
+.. list-table::
+   :header-rows: 1
+
+   * - 商品名
+     - 価格
+     - 画像
+   * - ラーメン
+     - 900
+     - ramen.png
+   * - チャーハン
+     - 700
+     - chahan.png
+
+.. image:: images/admin-item-registered.png
+
+トッピングも登録しておきます。
+
+ここではトッピングを次のように登録してみました。
+
+.. list-table::
+   :header-rows: 1
+
+   * - トッピング名
+     - 価格
+   * - チャーシュー
+     - 100
+   * - 煮卵
+     - 100
+   * - のり
+     - 60
+
+.. image:: images/admin-topping-registered.png
+
+モデルの作成からDjango管理画面でデータを登録する流れまでを実装できました。
+
+
