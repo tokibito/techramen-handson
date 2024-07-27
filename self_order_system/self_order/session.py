@@ -1,7 +1,6 @@
 from typing import Optional
 from dataclasses import dataclass, field, asdict
 
-
 @dataclass
 class SessionToppingOrder:
     '''セッションに保持するトッピング注文データ'''
@@ -15,7 +14,6 @@ class SessionToppingOrder:
     def from_dict(cls, data: dict):
         '''インスタンスを辞書から作成'''
         return cls(**data)
-
 
 @dataclass
 class SessionOrder:

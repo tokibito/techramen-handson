@@ -1,4 +1,11 @@
-{{ form }}
+{% load django_bootstrap5 %}
+
+{% if form.management_form %}
+  {% bootstrap_formset form layout='horizontal' %}
+{% else %}
+  {% bootstrap_form form layout='horizontal' %}
+{% endif %}
+
 <div>
-  <button type="submit">{{ submit_text }}</button>
+  {% bootstrap_button button_type="submit" content=submit_text %}
 </div>

@@ -6,22 +6,20 @@ from .models import Item, Topping, Order, ToppingOrder
 from . import forms
 from .session import SessionOrder, SessionToppingOrder
 
-
 def index(request):
-    '''セルフオーダーのトップページ'''
+    '''セルフオーダーのトップ画面'''
     form = forms.TableNoForm(request.POST or None)
     if form.is_valid():
         table_no = form.cleaned_data['table_no']
         # セッションデータ作成
         session_order = SessionOrder(table_no=table_no)
         request.session['session_order'] = session_order.as_dict()
-        # メニューページへリダイレクトする
+        # メニュー画面へリダイレクトする
         return redirect('menu')
     return render(request, 'index.html', {'form': form})
 
-
 class MenuView(TemplateView):
-    '''メニューページ'''
+    '''メニュー画面'''
     template_name = 'menu.html'
 
     def get_context_data(self, **kwargs):
@@ -45,9 +43,8 @@ class MenuView(TemplateView):
         # トッピング選択へリダイレクト
         return redirect('select_topping')
 
-
 class SelectToppingView(FormView):
-    '''トッピング選択ページ'''
+    '''トッピング選択画面'''
     template_name = 'select_topping.html'
     form_class = forms.ToppingOrderFormSet
     success_url = reverse_lazy('confirm')
@@ -76,9 +73,8 @@ class SelectToppingView(FormView):
         self.request.session['session_order'] = session_order.as_dict()
         return super().form_valid(form)
 
-
 class ConfirmView(FormView):
-    '''注文確認ページ'''
+    '''注文確認画面'''
     template_name = 'confirm.html'
     form_class = forms.ConfirmForm
     success_url = reverse_lazy('complete')
@@ -116,9 +112,8 @@ class ConfirmView(FormView):
         self.request.session['session_order'] = session_order.as_dict()
         return super().form_valid(form)
 
-
 class CompleteView(TemplateView):
-    '''注文完了ページ'''
+    '''注文完了画面'''
     template_name = 'complete.html'
 
     def get_context_data(self, **kwargs):

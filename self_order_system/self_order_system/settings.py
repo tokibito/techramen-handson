@@ -20,17 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4$7m$*8)v%^q*04+0j3de&8@((k4-w25@o%#gld)^jm73p2tgn'
+SECRET_KEY = 'django-insecure-py7tcommtrnz-pll74&(6xs-sy8-(x27ui*jo6y)r!*#v9^b*i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# 接続元ホストはすべてを許可
-ALLOWED_HOSTS = ['*']
-# 内部IPとして扱うIPアドレス
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -41,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'self_order',  # self_orderアプリケーションを有効化
     'debug_toolbar',  # django-debug-toolbar
     'django_bootstrap5',  # django-bootstrap5
-    'self_order',  # self_orderアプリケーション
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # django-debug-toolbar
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,11 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # bootstrap5を適用する場合は次の行のコメントを外す
-            BASE_DIR / 'templates_bootstrap5',
-
-            # テンプレートフゕァイルのディレクトリを指定
-            BASE_DIR / 'templates',
+            BASE_DIR / 'templates',  # プロジェクトフォルダ内のtemplatesをテンプレートフォルダにする
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -117,10 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-# 言語コード:日本語
 LANGUAGE_CODE = 'ja'
 
-# タイムゾーン:東京
 TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
@@ -138,6 +128,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 画像をアップロードするための設定
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

@@ -3,3 +3,4 @@ Django==5.0.7
 django-bootstrap5==24.2
 django-debug-toolbar==4.4.6
 sqlparse==0.5.1
+tzdata==2024.1

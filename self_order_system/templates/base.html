@@ -1,12 +1,13 @@
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block page_title %}{% endblock %}</title>
-  </head>
-  <body>
-    <h1>{% block title %}タイトル{% endblock %}</h1>
-    <div>
-      {% block content %}コンテンツ{% endblock %}
-    </div>
-  </body>
-</html>
+{% extends 'bootstrap.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block bootstrap5_content %}
+<div class="container">
+    <h1>{% block title %}(no title){% endblock %}</h1>
+
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+
+    {% block content %}(no content){% endblock %}
+</div>
+{% endblock %}
