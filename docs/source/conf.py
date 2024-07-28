@@ -6,6 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+#project = 'TechRAMEN 2024 Conference ハンズオン'
 project = 'TechRAMEN 2024 Conference ハンズオン'
 copyright = '2024, Shinya Okano'
 author = 'Shinya Okano'
@@ -29,3 +30,7 @@ html_theme_options = {
     'maincolor': '#343434',
 }
 html_css_files = ['custom.css']
+html_use_modindex = False
+html_use_index = False
+html_short_title = 'Djangoハンズオン'
+html_show_sourcelink = False
