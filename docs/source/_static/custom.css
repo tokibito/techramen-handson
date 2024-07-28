@@ -1,7 +1,21 @@
-section > img, .tip > img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 80%;
-  text-align: center;
+@media only screen and (max-width: 767px) {
+  div.body {
+    min-width: initial;
+    max-width: 100%;
+    word-break: break-all;
+  }
+
+  .literal > span.pre {
+    white-space: normal;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  section > img, .tip > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    text-align: center;
+  }
 }
